@@ -5,6 +5,35 @@ height: 24
 width: 70
 skip: 0
 
+---- i0
+123456789012345678901234567890123456789012345678901234567890123456
+         1         2         3         4         5         6     
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+
 ---- center
 Pegex - Perl 6 Rules for Everyone
 
@@ -13,12 +42,42 @@ by Ingy döt Net
 Pittsburgh Perl Workshop
 
 October 10, 2010
+---- pl
+== Show Me The Code
+
+use Pegex;
+
+my $grammar = "
+foo: <bar> [ <gorch> | <quux> ]?
+bar: /I Like Pie/
+gorch: /<BANG>/
+quux: /<QMARK>/
+";
+
+my $text = "I Like Pie!";
+
+print "O HAI!"
+    if pegex($grammar)->parse($text);
+---- pl,i0
+use Pegex;
+
+my $grammar = "
+foo: <bar> [ <gorch> | <quux> ]?
+bar: /I Like Pie/
+gorch: /<BANG>/
+quux: /<QMARK>/
+";
+
+my $text = "I Like Pie!";
+
+print "O HAI!"
+    if pegex($grammar)->parse($text);
 ----
 == Intro to Ingy dot Net
 
 * Programming since 1982
 +  * The year of the Patch
-* Writing Perl since 1998
++* Writing Perl since 1998
 * Releasing CPAN modules since 2000
 * Releasing JSAN modules since 2006
 * Releasing PyPI modules since 2010
@@ -101,12 +160,50 @@ October 10, 2010
 == Except Perl 6!
 
 * Pegex requires a PCRE style regex facility
-* Rakudo on has Perl 6 Rules...
-
-+ ...so far!
+* Rakudo only has Perl 6 Rules...
 ----
+== Close "Contact" of the 6 Kind
 
-    XXX
+Name: Nick Patch
+Address:
+  123 Main St
+  Boston, NY 01234
+Phone: 213-546-8709
+----
+== Pegex Contact Grammar
+
+contact:
+    /Name<COLON><WS>+/ <name> <BREAK>
+    /Address<COLON><BREAK>/ <address>
+    /Phone<COLON><WS>+/ <phone> <BREAK>
+name: <first_name> <WS>+ <last_name>
+address: <street> <BREAK> <city> <COMMA>
+    <WS>+ <state> <WS>+ <zipcode>
+first_name: /<WORD>+/
+last_name: /<WORD>+/
+street: /<ANY>+/
+state: /<UPPER><UPPER>/
+zipcode: /<DIGIT>{5}/
+phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
+----
+== >>> Show the same grammar in Perl6 rules.
+---- 
+== Who Needs Pegex?
+
++* Everyone!
++* Everyone needs a Parser
++* Acmeists need a Parser that works everywhere
+
+    Pegex is an Acmeist Parser 
+----
+== Projects Using Pegex
+
+* C'Dent
+* TestML
+* YAML
+* JSYNC
+
++* and Pegex!
 
 ----
 == The End
