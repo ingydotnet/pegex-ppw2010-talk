@@ -6,7 +6,7 @@ width: 66
 skip: 0
 vimrc: |
   set background=light
-  map GF /\.\.<cr>v$gf:noh<cr>
+  map 88 /\.\.<cr>v$gf:noh<cr>
 
 ---- center
 Pegex - Perl 6 Rules for Everyone
@@ -59,7 +59,7 @@ print "O HAI!"
 +* Wrote most of the BAD implementions
   * I'm not done yet!
 
-+* Started Acmeism
++* Coined Acmeism
 ----
 == Intro to Acmeism
 
@@ -103,7 +103,7 @@ Here are the major ones I'm working on:
 ----
 == Nick Patch is also Alive
 
-* An Esperantisto I met at YAPC::NA
+* Esperantisto I met at YAPC::NA
 * Went to my Acmeism Talk
 * Taught me Perl 6
 * Paired on testml-pm6 at Hackathon
@@ -130,7 +130,26 @@ Here are the major ones I'm working on:
 
 * PEG + Regex = Pegex
   * Parsing Expression Grammar
+    * Perl 6 Rules is a PEG (S05)
   * Regular Expression
+
+----
+== HOW Does Parsing Work?
+
++* I'm not really sure
+
++* But I'm picking up some ideas
+  * Apply rules to some text
+  * Call functions when things match
+    * Or when they don't
+  * Build ASTs
+  * Get Parsed...
++  * ...or die() trying  
+
++* TMTOWTDP
+* But many of them suck
+* I'm looking for simplicity
+
 ----
 == HOW to make a Pegex...
 
@@ -158,12 +177,23 @@ Address:
   Boston, NY 01234
 Phone: 213-546-8709
 ----
+== Anatomy of a Pegex Grammar
+
+* Rules, Regexes, Collections, Modifiers
+* The lowest level match is always a regex
+  * Anchored to the match point
+  * Speed++
+* Regexes can have rule pointers
+  * Regexes are combinated at compile time
+
+Let's look at a bigger fake grammar...
+----
 == Pegex Contact Grammar
 
 contact:
     /Name<COLON><WS>+/ <name> <BREAK>
     /Address<COLON><BREAK>/ <address>
-    /Phone<COLON><WS>+/ <phone> <BREAK>
+    [ /Phone<COLON><WS>+/ <phone> <BREAK> ]?
 name: <first_name> <WS>+ <last_name>
 address: <street> <BREAK> <city> <COMMA>
     <WS>+ <state> <WS>+ <zipcode>
@@ -220,8 +250,8 @@ phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
 == TestML - Perl 5
 
 * ../testml-tml
-* ../testml-pm
 * ../testml-pgx
+* ../testml-pm
 ----
 == TestML - Perl 6
 
@@ -248,6 +278,7 @@ phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
   * Regexes and Grammars
 * Perl 6 Rules is used for:
   * Simple pattern matching
+    * Perl 6 One Liners
   * Changing Perl 6 Syntax on the Fly
 * Pegex is probably just good for parsers
 
@@ -280,13 +311,53 @@ Review:
 * ../testml-pm/lib/TestML/Grammar.pm
 * ../testml-pm/lib/TestML/Compiler.pm
 ----
-== Acmeism Needs You
+== Acmeism 102
 
-* Pegex, TestML and C'Dent have a long way to go
+* Full Disclosure!
++* All this stuff if new and fragile
++* C'Dent only supports Hello::World
++* But it is all a continuation of 10 years work
+  * TestML is the new Test::Base
+  * Test::Base is all over CPAN
+----
+== Ingy döt Net 102
+
+* Let me Tell You Something About The Dude...
++* YAML is Great
+* Modules like YAML.pm can suck
+
+* I'M NOT DONE YET!
++* Not by a long shot...
+
+* The Audrey Tang 500
+----
+== The Ingy Challenge
+
+* Release a new module in 6 impossible languages
+  before breakfast!
+
+----
+== The Ingy Challenge
+
+Maybe some day. But more seriously...
+
++* Think as Big as You Can
+
++* Take as Long as You Need
+
++* Work as Open as You Can
+----
+== The Ingy Invitation
+
+* Acmeism, Pegex, TestML and C'Dent have a long way to go
 * I would like to pair program with everyone
 * I pair program very often
-* Find me on irc
 
-    Lower Your Ingy Number to 1!
++* Lower Your Ingy Number to 1!
++* Find me on irc
++* Grab me at a hackathon
++* Let me surf your couch
+----
+== Questions?
 ----
 == The End
