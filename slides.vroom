@@ -2,37 +2,11 @@
 title: Pegex - Perl 6 Rules for Everyone
 indent: 5
 height: 24
-width: 70
+width: 66
 skip: 0
-
----- i0
-123456789012345678901234567890123456789012345678901234567890123456
-         1         2         3         4         5         6     
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
+vimrc: |
+  set background=light
+  map GF /\.\.<cr>v$gf:noh<cr>
 
 ---- center
 Pegex - Perl 6 Rules for Everyone
@@ -58,30 +32,32 @@ my $text = "I Like Pie!";
 
 print "O HAI!"
     if pegex($grammar)->parse($text);
----- pl,i0
-use Pegex;
-
-my $grammar = "
-foo: <bar> [ <gorch> | <quux> ]?
-bar: /I Like Pie/
-gorch: /<BANG>/
-quux: /<QMARK>/
-";
-
-my $text = "I Like Pie!";
-
-print "O HAI!"
-    if pegex($grammar)->parse($text);
 ----
-== Intro to Ingy dot Net
+== In this talk:
+
+* You will learn of Pegex:
+  * HOW to use it in Perl 5
+  * WHAT it is and does
+  * WHY is is important
+  * WHEN you should use it
+  * WHERE you can get it and put it
+  * WHO(TF) is responsible
+
++* So last things first...
+----
+== Intro to Ingy döt Net
 
 * Programming since 1982
-+  * The year of the Patch
++  * The Year of the Punchcard
++  * The Year of the Patch
 +* Writing Perl since 1998
 * Releasing CPAN modules since 2000
 * Releasing JSAN modules since 2006
 * Releasing PyPI modules since 2010
-* Invented YAML
+
++* Invented YAML
++* Wrote most of the BAD implementions
+  * I'm not done yet!
 
 +* Started Acmeism
 ----
@@ -99,6 +75,8 @@ print "O HAI!"
 ----
 == Acmeist Projects
 
+Here are the major ones I'm working on:
+
 * C'Dent - Hack Once, Please Everyone
 * TestML - Write Once, Test Everywhere
 * Stardoc - C'Dent for Documentation
@@ -107,51 +85,61 @@ print "O HAI!"
 
 +* Pegex - Stay tuned
 ----
+== Minor Acmeist Projects
+
+* Jemplate - Template Toolkit for all
+* pQuery - jQuery everywhere
+* Wikiwyg - The stardoc editor
+----
 == Perl 6 is Alive
 
-* Rakudo Star first released July 2010
+* Rakudo Star first released July 2010!
 
-+* How many people about R*?
++* How many people know about R*?
 +* Used R*?
 +* Like R*?
 +* Written modules in R*?
 +* Released modules in R*?
 ----
-== Nick Patch
+== Nick Patch is also Alive
 
-* Speaks Esperanto
-* Acmeism Talk at YAPC::NA
+* An Esperantisto I met at YAPC::NA
+* Went to my Acmeism Talk
+* Taught me Perl 6
 * Paired on testml-pm6 at Hackathon
+
 * Good Friend and Collaborator
+* Giving a talk about TestML at 11:50
 
 ----
-== Pairing with Patch
+== Perl 6 Pairing with Patch
 
-* Hackathon was a success
-* P5 YAML -> P6 Rules in one Hour
-* TestML.pm6 was working...
+* Our Hackathon Pairing was a success
+* Got TestML P5 -> P6 Parsing in one Hour!
+  * Perl 6 Rules ++
++* Got the rest working in 6 more weeks!
+  * Perl 6/Rakudo --
+  * Hit all the road bumps... SLOWLY!
++* But along the way...
 
-+   6 weeks later!
-
-* Hit all the bad spots of Perl 6
-* But along the way...
-
-+    Pegex was born!
++    Pegex was born!!!
 ----
-== Pegex - Acmeist Parser Generator Language
+== WHAT is Pegex?
+
+* Pegex - Acmeist Parser Generator Language
 
 * PEG + Regex = Pegex
-  * Parser Expression Grammar
+  * Parsing Expression Grammar
   * Regular Expression
 ----
-== How to make a Pegex...
+== HOW to make a Pegex...
 
 * Take the best part of Perl 6
-* Take the best part of that...
 +  * Perl 6 Rules!!
-* Take the Acmeist parts of Regexes
++* Take the best parts of that...
++* Take the Acmeist parts of common Regexes
 
-* Mix it all up
++* Mix it all up
 
     Pegex is Simple, Powerful, Fast, Elegant
 
@@ -162,7 +150,7 @@ print "O HAI!"
 * Pegex requires a PCRE style regex facility
 * Rakudo only has Perl 6 Rules...
 ----
-== Close "Contact" of the 6 Kind
+== Close "Contact" of the 6th Kind
 
 Name: Nick Patch
 Address:
@@ -186,9 +174,18 @@ state: /<UPPER><UPPER>/
 zipcode: /<DIGIT>{5}/
 phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
 ----
-== >>> Show the same grammar in Perl6 rules.
+== WHERE Pegex Came From
+
+* Wrote TestML 0.000001 in 2009
+* Needed a Parser
+* YAML Grammar + Perl Code
+* C'Dent 0.000001 in 2010
+* Same kind of Grammar, Slightly improved
+* Saw Perl 6 Rules this Summer
+* Backported concepts to TestML and C'Dent
+* Formalized and Released Pegex
 ---- 
-== Who Needs Pegex?
+== WHO Needs Pegex?
 
 +* Everyone!
 +* Everyone needs a Parser
@@ -196,14 +193,100 @@ phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
 
     Pegex is an Acmeist Parser 
 ----
-== Projects Using Pegex
+== WHAT Uses Pegex?
 
-* C'Dent
-* TestML
-* YAML
-* JSYNC
+    These Acmeist Projects Need Pegex:
+
+* TestML - All Implementations except Perl 6
+* C'Dent - Python Implementation
+* YAML - Possible in Every Language
+* JSYNC - Possible in Every Language
 
 +* and Pegex!
+  * Self hosting
+  * Pegex compiles the Pegex Grammar
+----
+== Real World Usage
 
+* Look at how Pegex is being used currently:
+
+* TestML Perl 5
+* TestML Perl 6
+* TestML Python
+* C'Dent
+* Pegex in Pegex
+
+----
+== TestML - Perl 5
+
+* ../testml-tml
+* ../testml-pm
+* ../testml-pgx
+----
+== TestML - Perl 6
+
+* ../testml-pm6
+----
+== TestML - Python
+
+* ../testml-py
+----
+== C'Dent
+
+* ../cdent
+----
+== Pegex
+
+* ../pegex-pgx
+* ../pegex-pm
+* ../pegex-py
+
+----
+== Using Pegex in Perl
+
+* Larry wants to Marry...
+  * Regexes and Grammars
+* Perl 6 Rules is used for:
+  * Simple pattern matching
+  * Changing Perl 6 Syntax on the Fly
+* Pegex is probably just good for parsers
+
+* Pegex Always Matched from ^ to $
+---- pl
+== Simple Usage
+
+use Pegex;
+
+my $grammar = ...;
+my $text = ...;
+
+pegex($grammar)->match($text);
+
+$text =~ $grammar;
+
+my $ast = pegex($grammar)->match($text);
+---- pl
+== Real World Pegex
+
+In the real Pegex world, you define:
+
+* A grammar
+* A grammar class
+* A receiver
+* Parse text to receive information
+
+Review:
+
+* ../testml-pm/lib/TestML/Grammar.pm
+* ../testml-pm/lib/TestML/Compiler.pm
+----
+== Acmeism Needs You
+
+* Pegex, TestML and C'Dent have a long way to go
+* I would like to pair program with everyone
+* I pair program very often
+* Find me on irc
+
+    Lower Your Ingy Number to 1!
 ----
 == The End
