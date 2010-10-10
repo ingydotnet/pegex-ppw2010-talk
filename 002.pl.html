@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>002.pl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "001" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "003" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                         Show Me The Code
+     
+     use Pegex;
+     
+     my $grammar = &quot;
+     foo: &lt;bar&gt; [ &lt;gorch&gt; | &lt;quux&gt; ]?
+     bar: /I Like Pie/
+     gorch: /&lt;BANG&gt;/
+     quux: /&lt;QMARK&gt;/
+     &quot;;
+     
+     my $text = &quot;I Like Pie!&quot;;
+     
+     print &quot;O HAI!&quot;
+         if pegex($grammar)-&gt;parse($text);
+
+
+
+
+
+
+</pre>
+</body>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>017</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "016" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "018" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+                      Pegex Contact Grammar
+     
+     contact:
+         /Name&lt;COLON&gt;&lt;WS&gt;+/ &lt;name&gt; &lt;BREAK&gt;
+         /Address&lt;COLON&gt;&lt;BREAK&gt;/ &lt;address&gt;
+         [ /Phone&lt;COLON&gt;&lt;WS&gt;+/ &lt;phone&gt; &lt;BREAK&gt; ]?
+     name: &lt;first_name&gt; &lt;WS&gt;+ &lt;last_name&gt;
+     address: &lt;street&gt; &lt;BREAK&gt; &lt;city&gt; &lt;COMMA&gt;
+         &lt;WS&gt;+ &lt;state&gt; &lt;WS&gt;+ &lt;zipcode&gt;
+     first_name: /&lt;WORD&gt;+/
+     last_name: /&lt;WORD&gt;+/
+     street: /&lt;ANY&gt;+/
+     state: /&lt;UPPER&gt;&lt;UPPER&gt;/
+     zipcode: /&lt;DIGIT&gt;{5}/
+     phone: /&lt;DIGIT&gt;{3}&lt;DASH&gt;&lt;DIGIT&gt;{3}&lt;DASH&gt;&lt;DIGIT&gt;{4}/
+
+
+
+
+
+
+</pre>
+</body>

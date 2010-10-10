@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>016</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script>
+function navigate(e) {
+    var keynum = (window.event) // IE
+        ? e.keyCode
+        : e.which;
+    if (keynum == 8) {
+        window.location = "015" + ".html";
+        return false;
+    }
+    if (keynum == 13 || keynum == 32) {
+        window.location = "017" + ".html";
+        return false;
+    }
+    if (keynum == 73 || keynum == 105) {
+        window.location = "index.html";
+        return false;
+    }
+    return true;
+}
+</script>
+</head>
+<body onkeypress="return navigate(event)">
+<pre>
+
+
+
+
+
+                    Anatomy of a Pegex Grammar
+     
+     * Rules, Regexes, Collections, Modifiers
+     * The lowest level match is always a regex
+       * Anchored to the match point
+       * Speed++
+     * Regexes can have rule pointers
+       * Regexes are combinated at compile time
+     
+     Let's look at a bigger fake grammar...
+
+
+
+
+
+
+
+
+</pre>
+</body>
