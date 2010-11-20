@@ -2,68 +2,362 @@
 title: Pegex - Perl 6 Rules for Everyone
 indent: 5
 height: 24
-width: 70
+width: 66
 skip: 0
+vimrc: |
+  set background=light
+  map 88 /\.\.<cr>v$gf:noh<cr>
 
 ---- center
 Pegex - Perl 6 Rules for Everyone
 
 by Ingy dot Net
 
-(hint: press the spacebar)
+Pittsburgh Perl Workshop
+
+October 10, 2010
+---- pl
+== Show Me The Code
+
+use Pegex;
+
+my $grammar = "
+foo: <bar> [ <gorch> | <quux> ]?
+bar: /I Like Pie/
+gorch: /<BANG>/
+quux: /<QMARK>/
+";
+
+my $text = "I Like Pie!";
+
+print "O HAI!"
+    if pegex($grammar)->parse($text);
+----
+== In this talk:
+
+* You will learn of Pegex:
+  * HOW to use it in Perl 5
+  * WHAT it is and does
+  * WHY is is important
+  * WHEN you should use it
+  * WHERE you can get it and put it
+  * WHO(TF) is responsible
+
++* So last things first...
+----
+== Intro to Ingy döt Net
+
+* Programming since 1982
++  * The Year of the Punchcard
++  * The Year of the Patch
++* Writing Perl since 1998
+* Releasing CPAN modules since 2000
+* Releasing JSAN modules since 2006
+* Releasing PyPI modules since 2010
+
++* Invented YAML
++* Wrote most of the BAD implementions
+  * I'm not done yet!
+
++* Coined Acmeism
+----
+== Intro to Acmeism
+
+* All programming languages are the same
+  * They let people tell computers what to do
+
++* Programming languages tend to divide people
+  * Similar to natural languages
+
++* Acmeism is implementing IDEAS in all languages
+  * http://acmeism.org
 
 ----
-== Ideas & Topics
+== Acmeist Projects
 
-- Take slides from other recent talks
-- Eee vs Apple
-- Don't be tied to a computer -> don't be tied to a computer language
-  - aycabtu
-    - 109 repos
-  - dotdotdot
-- Cogbase - my brain stored on github
-- Integrate many of my projects into the talk
-  - hacktive ...
-- Think as big as you can
-  - Computers can help our species, race, world
-- Explain Ingy - the BIG PLAN vs Module Maintenance
-- PGH vs PGX
-- .pgx is file extension
-- -pgx is repo extension
-  - -tml is testml repo ext
-- A pgx grammar can have its own repo
-  - yaml, jsync, testml & pegex-pgx
-- pegex-pm and pegex-py are the implementations
-- pegex can be self hosted
-  - not yet working
-- Perl 6 turned all regexes into grammars
-  - Regexes are teakettles, Grammars are steamships
-- Promote patch's talk on TestML at 11:50
+Here are the major ones I'm working on:
 
-- Compare Pegex.pm to Perl6::Rules and Regexp::Grammars
-- My "discovery" of perl6 rules
-  - patch and yapc::na
-- Pegex Syntax
-- Pegex compilation phases
-- Integrate hacktive live.
-- Invite people to pair program with me.
-- All my programming ideas come from DRY Desire
-- Acmeism is DRY across languages
+* C'Dent - Hack Once, Please Everyone
+* TestML - Write Once, Test Everywhere
+* Stardoc - C'Dent for Documentation
+* YAML - Share data anywhere
+* JSYNC - YAML meets JSON
+
++* Pegex - Stay tuned
+----
+== Minor Acmeist Projects
+
+* Jemplate - Template Toolkit for all
+* pQuery - jQuery everywhere
+* Wikiwyg - The stardoc editor
+----
+== Perl 6 is Alive
+
+* Rakudo Star first released July 2010!
+
++* How many people know about R*?
++* Used R*?
++* Like R*?
++* Written modules in R*?
++* Released modules in R*?
+----
+== Nick Patch is also Alive
+
+* Esperantisto I met at YAPC::NA
+* Went to my Acmeism Talk
+* Taught me Perl 6
+* Paired on testml-pm6 at Hackathon
+
+* Good Friend and Collaborator
+* Giving a talk about TestML at 11:50
 
 ----
-== DRY Humor
+== Perl 6 Pairing with Patch
 
-* All the good ideas have been thought of.
-* All the important modules have been written.
+* Our Hackathon Pairing was a success
+* Got TestML P5 -> P6 Parsing in one Hour!
+  * Perl 6 Rules ++
++* Got the rest working in 6 more weeks!
+  * Perl 6/Rakudo --
+  * Hit all the road bumps... SLOWLY!
++* But along the way...
 
-    WRONG!
++    Pegex was born!!!
 ----
-== Foundations of Acmeism
+== WHAT is Pegex?
 
-* C'Dent - DRY Programming Language
-* TestML - Acmeist Unit Tests
-* Stardoc - Write Once, Publish Everywhere
-* Pegex - Everything Needs a Parser!
+* Pegex - Acmeist Parser Generator Language
 
+* PEG + Regex = Pegex
+  * Parsing Expression Grammar
+    * Perl 6 Rules is a PEG (S05)
+  * Regular Expression
+
+----
+== HOW Does Parsing Work?
+
++* I'm not really sure
+
++* But I'm picking up some ideas
+  * Apply rules to some text
+  * Call functions when things match
+    * Or when they don't
+  * Build ASTs
+  * Get Parsed...
++  * ...or die() trying  
+
++* TMTOWTDP
+* But many of them suck
+* I'm looking for simplicity
+
+----
+== HOW to make a Pegex...
+
+* Take the best part of Perl 6
++  * Perl 6 Rules!!
++* Take the best parts of that...
++* Take the Acmeist parts of common Regexes
+
++* Mix it all up
+
+    Pegex is Simple, Powerful, Fast, Elegant
+
+    and Acmeist. (It works for everyone)
+----
+== Except Perl 6!
+
+* Pegex requires a PCRE style regex facility
+* Rakudo only has Perl 6 Rules...
+----
+== Close "Contact" of the 6th Kind
+
+Name: Nick Patch
+Address:
+  123 Main St
+  Boston, NY 01234
+Phone: 213-546-8709
+----
+== Anatomy of a Pegex Grammar
+
+* Rules, Regexes, Collections, Modifiers
+* The lowest level match is always a regex
+  * Anchored to the match point
+  * Speed++
+* Regexes can have rule pointers
+  * Regexes are combinated at compile time
+
+Let's look at a bigger fake grammar...
+----
+== Pegex Contact Grammar
+
+contact:
+    /Name<COLON><WS>+/ <name> <BREAK>
+    /Address<COLON><BREAK>/ <address>
+    [ /Phone<COLON><WS>+/ <phone> <BREAK> ]?
+name: <first_name> <WS>+ <last_name>
+address: <street> <BREAK> <city> <COMMA>
+    <WS>+ <state> <WS>+ <zipcode>
+first_name: /<WORD>+/
+last_name: /<WORD>+/
+street: /<ANY>+/
+state: /<UPPER><UPPER>/
+zipcode: /<DIGIT>{5}/
+phone: /<DIGIT>{3}<DASH><DIGIT>{3}<DASH><DIGIT>{4}/
+----
+== WHERE Pegex Came From
+
+* Wrote TestML 0.000001 in 2009
+* Needed a Parser
+* YAML Grammar + Perl Code
+* C'Dent 0.000001 in 2010
+* Same kind of Grammar, Slightly improved
+* Saw Perl 6 Rules this Summer
+* Backported concepts to TestML and C'Dent
+* Formalized and Released Pegex
+---- 
+== WHO Needs Pegex?
+
++* Everyone!
++* Everyone needs a Parser
++* Acmeists need a Parser that works everywhere
+
+    Pegex is an Acmeist Parser 
+----
+== WHAT Uses Pegex?
+
+    These Acmeist Projects Need Pegex:
+
+* TestML - All Implementations except Perl 6
+* C'Dent - Python Implementation
+* YAML - Possible in Every Language
+* JSYNC - Possible in Every Language
+
++* and Pegex!
+  * Self hosting
+  * Pegex compiles the Pegex Grammar
+----
+== Real World Usage
+
+* Look at how Pegex is being used currently:
+
+* TestML Perl 5
+* TestML Perl 6
+* TestML Python
+* C'Dent
+* Pegex in Pegex
+
+----
+== TestML - Perl 5
+
+* ../testml-tml
+* ../testml-pgx
+* ../testml-pm
+----
+== TestML - Perl 6
+
+* ../testml-pm6
+----
+== TestML - Python
+
+* ../testml-py
+----
+== C'Dent
+
+* ../cdent
+----
+== Pegex
+
+* ../pegex-pgx
+* ../pegex-pm
+* ../pegex-py
+
+----
+== Using Pegex in Perl
+
+* Larry wants to Marry...
+  * Regexes and Grammars
+* Perl 6 Rules is used for:
+  * Simple pattern matching
+    * Perl 6 One Liners
+  * Changing Perl 6 Syntax on the Fly
+* Pegex is probably just good for parsers
+
+* Pegex Always Matched from ^ to $
+---- pl
+== Simple Usage
+
+use Pegex;
+
+my $grammar = ...;
+my $text = ...;
+
+pegex($grammar)->match($text);
+
+$text =~ $grammar;
+
+my $ast = pegex($grammar)->match($text);
+---- pl
+== Real World Pegex
+
+In the real Pegex world, you define:
+
+* A grammar
+* A grammar class
+* A receiver
+* Parse text to receive information
+
+Review:
+
+* ../testml-pm/lib/TestML/Grammar.pm
+* ../testml-pm/lib/TestML/Compiler.pm
+----
+== Acmeism 102
+
+* Full Disclosure!
++* All this stuff if new and fragile
++* C'Dent only supports Hello::World
++* But it is all a continuation of 10 years work
+  * TestML is the new Test::Base
+  * Test::Base is all over CPAN
+----
+== Ingy döt Net 102
+
+* Let me Tell You Something About The Dude...
++* YAML is Great
+* Modules like YAML.pm can suck
+
+* I'M NOT DONE YET!
++* Not by a long shot...
+
+* The Audrey Tang 500
+----
+== The Ingy Challenge
+
+* Release a new module in 6 impossible languages
+  before breakfast!
+
+----
+== The Ingy Challenge
+
+Maybe some day. But more seriously...
+
++* Think as Big as You Can
+
++* Take as Long as You Need
+
++* Work as Open as You Can
+----
+== The Ingy Invitation
+
+* Acmeism, Pegex, TestML and C'Dent have a long way to go
+* I would like to pair program with everyone
+* I pair program very often
+
++* Lower Your Ingy Number to 1!
++* Find me on irc
++* Grab me at a hackathon
++* Let me surf your couch
+----
+== Questions?
 ----
 == The End
